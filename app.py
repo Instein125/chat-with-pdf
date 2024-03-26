@@ -22,9 +22,10 @@ def main():
 
 
     st.header("Chat with PDFs")
-    query_imput = st.text_input("Enter your question")
-    if query_imput:
-        response = chatbot.get_response(query=query_imput)
+
+    query_input = st.text_input("Enter your question")
+    if query_input:
+        response = chatbot.get_response(query=query_input)
         st.write("Answer: ", response['output_text'])
 
 if __name__ == "__main__":

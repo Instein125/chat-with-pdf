@@ -25,7 +25,7 @@ class ChatBot:
         self.embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
         self.llm = ChatGoogleGenerativeAI(model='gemini-pro', temperature=0.5, convert_system_message_to_human=True)
         self.prompt_template = """
-        Answer the given question according to the context provided. Include the details.
+        Answer the given question according to the context provided. Study the context and understand the answer relevant to given query and then answer in simple terms.
         If answer is not in the provided context simply answer "I dont know the answer", donot provide wrong answer
         \n
         context: {context}
@@ -78,6 +78,7 @@ class ChatBot:
         """
         db = FAISS.load_local("faiss_index", self.embeddings, allow_dangerous_deserialization= True)
         relevant_docs = db.similarity_search(query)
+        # st.write(relevant_docs)
         chain = self.get_qa_chain()
         response = chain(
             {
